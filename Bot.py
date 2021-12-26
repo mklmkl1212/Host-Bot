@@ -5,6 +5,9 @@ bot = telebot.TeleBot('#Your Telegram Bot Token!')
 # Github: https://github.com/PluginX
 # Telegram: https://t.me/Plugin
 
+Max_Files_For_User = 4                                                                   #how many user can host bots
+Black_Listed_Librarys = ['os','base64','input','bot.py','base32','marshal','selenium']   #Black listed lib or words!
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
 
@@ -17,18 +20,18 @@ def send_welcome(message):
         if str(message.chat.id) in data:
 
             key = types.InlineKeyboardMarkup()
-            b1 = types.InlineKeyboardButton(text='Channel', url='https://t.me/CodeLeak')
-            b2 = types.InlineKeyboardButton(text='apis.red', url='https://apis.red')
+            b1 = types.InlineKeyboardButton(text='Channel 📢', url='https://t.me/Avira')
+            b2 = types.InlineKeyboardButton(text='Source code </>', url='https://github.com/PluginX/Host-Bot/')
 
             key.add(b1)
             key.add(b2)
 
-            bot.send_photo(message.chat.id, 'https://t.me/thuuu/8',
-                           caption=f'Hi {first}.\nWelcome to our free python host bot\nMade By: @Plugin\n\nPlease see the photo!\n*Send your python file first!*\n\n/help\n *To get the help page*\n\n/pip + Library name\n *To install a Library*\n\n/run + Your file Id\n *To run your bot!*',
+            bot.send_video(message.chat.id, 'https://t.me/thuuu/9',
+                           caption=f'*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n**Currently version: V0.2**\nMade By: @Plugin\n\n/help\n  *To get the help page*\n\n/pip + Library name\n  *To install a Library*\n\n/run + Your file Id\n  *To run your bot!*',
                            parse_mode='markdown', reply_markup=key)
         else:
             try:
-                bot.send_message(message.chat.id,text=f"*Hi* {first}.\nWelcome to our free python host bot\n\n*You are not on the database please open this url so i can add your id on the bot database you have been added to the bot database* \n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type /start again!",parse_mode='markdown')
+                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot!\n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
             except:
                 bot.send_message(message.chat.id, text="*API is down* 🚫\nPlease contact the coder: @Plugin",parse_mode='markdown')
     except:
@@ -61,16 +64,13 @@ def Get(message):
                     elif 'requests' in the_pip:
                         bot.send_message(message.chat.id, text="Installed by the developer ✅")
 
-                    elif 'selenium' in the_pip:
-                        bot.send_message(message.chat.id, text="Selenium blocked by the developer 🚫")
-
                     else:
                         os.system(f"pip install {the_pip}")
                         bot.send_message(message.chat.id, text="Install success! ✅")
 
                 except:
                     bot.send_message(message.chat.id,
-                                     text=f"sorry! you leave something empty!\nOr you are missing some requires\nPlease see the photo in /start ")
+                                     text=f"Sorry you leave something empty!\nOr you are missing some requires\nPlease try again /start ")
 
             elif msg.startswith('/run'):
                 try:
@@ -78,39 +78,40 @@ def Get(message):
                     data = str(msg).split(' ')
                     the_file_name = data[1]
 
-                    os.startfile(f"bots\{the_file_name}.py")
+                    os.startfile(f"bots\{message.chat.id}\{the_file_name}.py")
                     bot.send_message(message.chat.id, text="Your Bot hosted success! ✅")
 
                 except:
                     bot.send_message(message.chat.id,
-                                     text=f"sorry! you leave something empty!\nOr you are missing some requires\nPlease see the photo in /start ")
+                                     text=f"Sorry you leave something empty!\nOr you are missing some requires\nPlease try again /start ")
 
             elif msg.startswith('/help'):
                 try:
 
                     key = types.InlineKeyboardMarkup()
                     b1 = types.InlineKeyboardButton(text='Coder', url='https://t.me/Plugin')
+                    b2 = types.InlineKeyboardButton(text='Source code </>', url='https://github.com/PluginX/Host-Bot/')
                     key.add(b1)
+                    key.add(b2)
 
-                    bot.send_message(message.chat.id, text="*Help Page* 📑\n1- Drag your python file to the bot\n2- Then the bot will give you *File ID*\n\n3- Then install your Librarys\n 🔍 using /pip + *library name*\n\n4- Run your bot\n 🔍 using /run + *File iD*\n\n*Contact*: @Plugin", parse_mode='markdown', reply_markup=key)
+                    bot.send_photo(message.chat.id,photo='https://t.me/thuuu/8',caption="*Help Page* 📑\n1- Drag your python file to the bot\n2- Then the bot will give you *File ID*\n\n3- Then install your Librarys\n 🔍 using /pip + *library name*\n\n4- Run your bot\n 🔍 using /run + *File iD*\n\n*Contact*: @Plugin", parse_mode='markdown', reply_markup=key)
 
                 except:
-                    bot.send_message(message.chat.id,text=f"sorry! you leave something empty!\nOr you are missing some requires\nPlease see the photo in /start ")
+                    bot.send_message(message.chat.id,
+                                     text=f"Sorry you leave something empty!\nOr you are missing some requires\nPlease try again /start ")
 
             else:
-                bot.send_message(message.chat.id, text=f"Sorry!, I cant understand what the hell you want!, {msg}")
+                bot.send_message(message.chat.id, text=f"Sorry!\nI cant understand what the hell you want!")
 
         else:
             try:
-                bot.send_message(message.chat.id,
-                                 text=f"*Hi* {first}.\nWelcome to our free python host bot\n\n*You are not on the database please open this url so i can add your id on the bot database you have been added to the bot database* \n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type /start again!",parse_mode='markdown')
+                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot!\n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
             except:
                 bot.send_message(message.chat.id, text="*API is down* 🚫\nPlease contact the coder: @Plugin",
                                  parse_mode='markdown')
     except:
         bot.send_message(message.chat.id, text="*API is down* 🚫\nPlease contact the coder: @Plugin",
                          parse_mode='markdown')
-
 
 @bot.message_handler(content_types=['document'])
 def save(message):
@@ -119,50 +120,40 @@ def save(message):
 
     file_info = bot.get_file(message.document.file_id)
     downloaded_file = bot.download_file(file_info.file_path)
-
     ran = 'a'+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)+random.choice(chars)
 
-    with open('bots/'+ran+'.py', 'wb') as new_file:
+    try:
+        os.makedirs('bots/'+str(message.chat.id)+'/')
+    except:
+        pass
+    with open('bots/'+ str(message.chat.id) + '/' + ran+'.py', 'wb') as new_file:
         new_file.write(downloaded_file)
 
-    try:
-        with open('bots/'+ran+'.py', 'r',encoding='utf-8') as check_file:
-            for line in check_file:
-                if 'os' in line:
-                    bot.reply_to(message, text=f'You cant use *Os* Library 🚫\nFile Removed! ', parse_mode='markdown')
-                    check_file.close()
-                    os.remove('bots/'+ran+'.py')
-                    break
-                elif 'input' in line:
-                    bot.reply_to(message, text=f'You cant use *Inputs!* 🚫\nFile Removed!',
-                                 parse_mode='markdown')
-                    check_file.close()
-                    os.remove('bots/' + ran + '.py')
-                    break
-                elif 'marshal' in line:
-                    bot.reply_to(message, text=f'You file is *encrypted* 🚫\nFile Removed!',
-                                 parse_mode='markdown')
-                    check_file.close()
-                    os.remove('bots/' + ran + '.py')
-                    break
-                elif 'base64' in line:
-                    bot.reply_to(message, text=f'You file is *encrypted* 🚫\nFile Removed!',
-                                 parse_mode='markdown')
-                    check_file.close()
-                    os.remove('bots/' + ran + '.py')
-                    break
-                elif 'bot.py' in line:
-                    bot.reply_to(message, text=f'You cant use *bot.py* in your file 🚫\nFile Removed!',
-                                 parse_mode='markdown')
-                    check_file.close()
-                    os.remove('bots/' + ran + '.py')
+    getLen = len(os.listdir('bots/'+ str(message.chat.id) + '/'))
+
+    if int(getLen) >= int(Max_Files_For_User+1):
+        bot.send_message(message.chat.id, text=f'*You have upload {getLen} files\n You cant upload more* 🚫',
+                         parse_mode='markdown')
+        os.remove('bots/' + str(message.chat.id) + '/' + ran + '.py')
+    else:
+        try:
+            BlackListedLib = ''
+            emptystr = False
+            for i in Black_Listed_Librarys:
+                search = str(downloaded_file).find(i)
+                if search > 0:
+                    emptystr = True
+                    BlackListedLib += i
                     break
 
-                else:
-                    bot.send_message(message.chat.id, text=f'*File upload success* ✅\n\n *Your File ID*:\n{ran}',parse_mode='markdown')
-                    break
-    except:
-        bot.send_message(message.chat.id, text=f'*File upload disabled by the coder* 🚫\nPlease try again later',parse_mode='markdown')
+            if emptystr == True:
+                bot.reply_to(message, text=f'You cant use *{BlackListedLib}* 🚫\nFile Removed! ', parse_mode='markdown')
+                os.remove('bots/' + str(message.chat.id) + '/' + ran + '.py')
+            else:
+                bot.send_message(message.chat.id, text=f'*File upload success* ✅\n*Your File ID*:',parse_mode='markdown')
+                bot.send_message(message.chat.id, text=f'```{ran}```',parse_mode='markdown')
+        except:
+            bot.send_message(message.chat.id, text=f'*Error in file upload contact the coder* 🚫\nPlease try again later',parse_mode='markdown')
 
 
 bot.polling(True)
