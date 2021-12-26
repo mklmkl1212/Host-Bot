@@ -19,11 +19,11 @@ def pyhostbotmakemepage():
 
     else:
         try:
-            os.makedirs(f'../public_html/captcha/{folderName}')
+            os.makedirs(f'../public_html/x/{folderName}')
         except:
             pass
 
-        r = requests.get(f'https://apis.red/captcha/{folderName}/data.txt').text
+        r = requests.get(f'https://apis.red/x/{folderName}/data.txt').text
         
         if id in r:
             return render_template('Rejected.html', theId=id, theIP=ip, theName='@PyHostBot', theError='You Already Have Account On The Bot!')
@@ -35,7 +35,7 @@ def pyhostbotmakemepage():
             return render_template('Rejected.html', theId=id, theIP=ip, theName='@PyHostBot', theError='You Already Have Account On The Bot!')
             
         elif id not in r:
-            with open(f'../public_html/captcha/{folderName}/data.txt', 'a+') as the_bin_file:
+            with open(f'../public_html/x/{folderName}/data.txt', 'a+') as the_bin_file:
                 the_bin_file.writelines(f'{id},{ip}\n')
             
             return render_template('Verified.html', theId=id, theIP=ip, theName='@PyHostBot')
