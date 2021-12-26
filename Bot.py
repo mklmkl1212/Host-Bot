@@ -15,23 +15,26 @@ def send_welcome(message):
         bot.send_message(message.chat.id, text="*Checking if you are in the database* 🕔\nPlease wait..",parse_mode='markdown')
         first = message.chat.first_name
 
-        data = requests.get('https://apis.red/botdata/data.txt').text
+        data = requests.get('https://apis.red/captcha/pyhostbot/data.txt').text
 
         if str(message.chat.id) in data:
+            data2 = requests.get(f'https://apis.red/isVerified/check/?id={message.chat.id}').text
+            if 'You Already Have Account On The This IP!' in data2:
+                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot*!\n\nhttps://apis.red/isVerified/check/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
+            else:
+                key = types.InlineKeyboardMarkup()
+                b1 = types.InlineKeyboardButton(text='Channel 📢', url='https://t.me/Avira')
+                b2 = types.InlineKeyboardButton(text='Source code </>', url='https://github.com/PluginX/Host-Bot/')
 
-            key = types.InlineKeyboardMarkup()
-            b1 = types.InlineKeyboardButton(text='Channel 📢', url='https://t.me/Avira')
-            b2 = types.InlineKeyboardButton(text='Source code </>', url='https://github.com/PluginX/Host-Bot/')
+                key.add(b1)
+                key.add(b2)
 
-            key.add(b1)
-            key.add(b2)
-
-            bot.send_video(message.chat.id, 'https://t.me/thuuu/9',
-                           caption=f'*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n**Currently version: V0.2**\nMade By: @Plugin\n\n/help\n  *To get the help page*\n\n/pip + Library name\n  *To install a Library*\n\n/run + Your file Id\n  *To run your bot!*',
-                           parse_mode='markdown', reply_markup=key)
+                bot.send_video(message.chat.id, 'https://t.me/thuuu/9',
+                               caption=f'*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n**Currently version: V0.2**\nMade By: @Plugin\n\n/help\n  *To get the help page*\n\n/pip + Library name\n  *To install a Library*\n\n/run + Your file Id\n  *To run your bot!*',
+                               parse_mode='markdown', reply_markup=key)
         else:
             try:
-                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot!\n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
+                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot*!\n\nhttps://apis.red/isVerified/check/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
             except:
                 bot.send_message(message.chat.id, text="*API is down* 🚫\nPlease contact the coder: @Plugin",parse_mode='markdown')
     except:
@@ -46,7 +49,7 @@ def Get(message):
     first = message.chat.first_name
 
     try:
-        data = requests.get('https://apis.red/botdata/data.txt').text
+        data = requests.get('https://apis.red/captcha/pyhostbot/data.txt').text
 
         if str(message.chat.id) in data:
             if msg.startswith('/pip'):
@@ -105,7 +108,9 @@ def Get(message):
 
         else:
             try:
-                bot.send_message(message.chat.id,text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot!\n\nhttps://apis.red/api/python-host/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",parse_mode='markdown')
+                bot.send_message(message.chat.id,
+                                 text=f"*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n*You are not on the database please open this url so i can add your id on the bot database and make sure the you are not a robot*!\n\nhttps://apis.red/isVerified/check/?id={str(message.chat.id)}\n\nWhen you are done type */start again!*",
+                                 parse_mode='markdown')
             except:
                 bot.send_message(message.chat.id, text="*API is down* 🚫\nPlease contact the coder: @Plugin",
                                  parse_mode='markdown')
@@ -145,6 +150,12 @@ def save(message):
                     emptystr = True
                     BlackListedLib += i
                     break
+
+            if BlackListedLib == 'os':
+                search = str(downloaded_file).find('post')
+                if search > 0:
+                    emptystr = False
+                
 
             if emptystr == True:
                 bot.reply_to(message, text=f'You cant use *{BlackListedLib}* 🚫\nFile Removed! ', parse_mode='markdown')
