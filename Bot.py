@@ -15,7 +15,7 @@ def send_welcome(message):
         bot.send_message(message.chat.id, text="*Checking if you are in the database* 🕔\nPlease wait..",parse_mode='markdown')
         first = message.chat.first_name
 
-        data = requests.get('https://apis.red/captcha/pyhostbot/data.txt').text
+        data = requests.get('https://apis.red/.......').text
 
         if str(message.chat.id) in data:
             data2 = requests.get(f'https://apis.red/isVerified/check/?id={message.chat.id}').text
@@ -49,7 +49,7 @@ def Get(message):
     first = message.chat.first_name
 
     try:
-        data = requests.get('https://apis.red/captcha/pyhostbot/data.txt').text
+        data = requests.get('https://apis.red/.......').text
 
         if str(message.chat.id) in data:
             if msg.startswith('/pip'):
