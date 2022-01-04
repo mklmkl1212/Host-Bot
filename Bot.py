@@ -35,7 +35,7 @@ def send_welcome(message):
                 key.add(b2)
 
                 bot.send_video(message.chat.id, 'https://t.me/thuuu/9',
-                               caption=f'*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n**Currently version: V0.2**\nMade By: @Plugin\n\n/help\n  *To get the help page*\n\n/files\n  *To get your files*\n\n/info\n  *To see the not allowed libraries*\n\n/get + File ID\n  *To get your file*\n\n/pip + Library name\n  *To install a Library*\n\n/run + Your file Id\n  *To run your bot!*',
+                               caption=f'*Hello* {first}.\nWelcome\n  To the best *Python* host bot\n\n**Currently version: V0.3**\nMade By: @Plugin\n\n/help\n  *To get the help page*\n\n/files\n  *To get your files*\n\n/info\n  *To see the not allowed libraries*\n\n/get + Your file id\n  *To get your file*\n\n/pip + Library name\n  *To install a Library*\n\n/run + Your file Id\n  *To run your bot!*',
                                parse_mode='markdown', reply_markup=key)
         else:
             try:
