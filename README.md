@@ -1,11 +1,11 @@
-# Host-Bot [ V0.2 ]
+# Host-Bot [ V0.3 ]
 <p align="center">
 <p/>
 <p align="center">
   <a href="mailto:yazanemails@gmail.com">
      <img  src="https://img.shields.io/badge/email-red?style=for-the-badge&logo=gmail&logoColor=white" alt="email">
   <a/>&nbsp;
-  <a href="https://t.me/CodeLeak">
+  <a href="https://t.me/Avira">
      <img  src="https://img.shields.io/badge/telegram-red?style=for-the-badge&logo=telegram&logoColor=white" alt="telegram">
   <a/>&nbsp;
   <a href="https://apis.red">
