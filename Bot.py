@@ -16,7 +16,7 @@ def home(message):
             data_file.close()
             if str(message.chat.id) not in df:
                 with open('data.txt', 'a') as data_file:
-                    data_file.write(str(message.chat.id))
+                    data_file.write(str(message.chat.id)+'\n')
                     data_file.close()
 
         key = types.InlineKeyboardMarkup()
