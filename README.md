@@ -13,12 +13,6 @@
   <a/>
 <p/>
 
-> **Setup the api**
-```
-Upload the flask api on your host
-#its not important to do
-#i used it just for simple captcha system  + save ids on your host!
-```   
 > **install requirements for the bot**
 ```
 pip install -r requirements.txt
