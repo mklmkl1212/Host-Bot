@@ -1,4 +1,4 @@
-# Host-Bot [ V0.3 ]
+# Host-Bot [ V0.4 ]
 <p align="center">
 <p/>
 <p align="center">
